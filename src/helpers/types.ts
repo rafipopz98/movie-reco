@@ -4,9 +4,6 @@ export interface UserType {
   email: string;
   password: string;
   isAdmin: boolean;
-  likedMovies: string[];
-  watchedMovies: string[];
-  bucketList: string[];
 }
 
 export interface MovieType {

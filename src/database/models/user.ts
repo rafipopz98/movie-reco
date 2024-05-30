@@ -5,9 +5,6 @@ const userSchema = new Schema<UserType>({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
-  likedMovies: { type: [String], default: [] },
-  watchedMovies: { type: [String], default: [] },
-  bucketList: { type: [String], default: [] },
 });
 
 const User = model<UserType>("User", userSchema);
