@@ -18,10 +18,10 @@ export const userRegister = async (req: Request, res: Response) => {
     res.cookie(COOKIE_TOKEN, token, {
       httpOnly: true,
     });
-
+    const { password: UserPassword, ...others }: any = newUser.toObject();
     return res
       .status(201)
-      .json({ message: "User registered successfully", token });
+      .json({ message: "User registered successfully", others });
   } catch (error) {
     console.log("error while regestring new user", error);
     return res.status(400).json({ message: "Error registering user", error });
@@ -43,13 +43,13 @@ export const userLogin = async (req: Request, res: Response) => {
     }
 
     const token = generateToken(user._id, user.email, user.isAdmin);
-
+    const { password: UserPassword, ...others }: any = user.toObject();
     // Set cookie with secure options
     res.cookie(COOKIE_TOKEN, token, {
       httpOnly: true,
     });
 
-    return res.status(200).json({ message: "Login successful", token });
+    return res.status(200).json({ message: "Login successful", others });
   } catch (error) {
     console.log("error while regestring new user", error);
     return res.status(400).json({ message: "Error logging in", error });

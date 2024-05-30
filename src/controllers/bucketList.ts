@@ -3,7 +3,7 @@ import BucketListMovie from "../database/models/bucketlist";
 
 export const toggleBucketListMovie = async (req: Request, res: Response) => {
   const { id: userId } = req.user;
-  const { movieId } = req.body;
+  const { id: movieId } = req.params;
 
   try {
     const checkUserBucketListMovie = await BucketListMovie.findOne({
@@ -28,14 +28,20 @@ export const toggleBucketListMovie = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Error while toggling bucketlist movie:", error);
     res.status(400).json({ message: "Error while bucket list movie", error });
-    }
+  }
 };
 
 export const getBucketListMovies = async (req: Request, res: Response) => {
+  const { skip, take } = req.query;
+  const skipNumber = parseInt(skip as string);
+  const takeNumber = parseInt(take as string);
   const { id: userId } = req.user;
 
   try {
-    const movies = await BucketListMovie.find(userId);
+    const movies = await BucketListMovie.find({ userId })
+      .skip(skipNumber)
+      .limit(takeNumber)
+      .populate("movieId");
     return res.status(200).json(movies);
   } catch (error) {
     console.error("Error while fetching for bucket list movies:", error);

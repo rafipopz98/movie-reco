@@ -5,4 +5,4 @@ import { isAuthUser } from "../middleware/isAuthUser";
 export const bucketListMovieRouter = express.Router();
 
 bucketListMovieRouter.post("/toggle/:id", isAuthUser, toggleBucketListMovie);
-bucketListMovieRouter.post("/get", isAuthUser, getBucketListMovies);
+bucketListMovieRouter.get("/get", isAuthUser, getBucketListMovies);

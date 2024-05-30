@@ -5,4 +5,4 @@ import { isAuthUser } from "../middleware/isAuthUser";
 export const likedMovieRouter = express.Router();
 
 likedMovieRouter.post("/toggle/:id", isAuthUser, toggleLikedMovie);
-likedMovieRouter.post("/get", isAuthUser, getLikedMovies);
+likedMovieRouter.get("/get", isAuthUser, getLikedMovies);

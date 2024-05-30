@@ -8,9 +8,8 @@ export const isAuthUser = (req: Request, res: Response, next: NextFunction) => {
     return res.status(401).json({ message: "No token, authorization denied" });
   }
   jwt.verify(token, SECRET_TOKEN, async (err: any, data: any) => {
-    if (err) return res.status(403).send({ message: "Token is not valid" });
+    if (err) return res.status(403).send({ message: "Please login again" });
     req.user = data;
-    console.log(data);
     next();
   });
 };

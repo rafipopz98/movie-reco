@@ -3,7 +3,7 @@ import LikedMovie from "../database/models/liked";
 
 export const toggleLikedMovie = async (req: Request, res: Response) => {
   const { id: userId } = req.user;
-  const { movieId } = req.body;
+  const { id: movieId } = req.params;
 
   try {
     const checkUserLikedMovie = await LikedMovie.findOne({ userId, movieId });
@@ -26,9 +26,13 @@ export const toggleLikedMovie = async (req: Request, res: Response) => {
 
 export const getLikedMovies = async (req: Request, res: Response) => {
   const { id: userId } = req.user;
-
+  const { skip, take } = req.query;
+  const skipNumber = parseInt(skip as string);
+  const takeNumber = parseInt(take as string);
   try {
-    const movies = await LikedMovie.find(userId);
+    const movies = await LikedMovie.find({ userId })
+      .skip(skipNumber)
+      .limit(takeNumber).populate("movieId")
     return res.status(200).json(movies);
   } catch (error) {
     console.error("Error while fetching for liked movie:", error);
