@@ -19,5 +19,8 @@ Instructions:
 2. Import the collection into your Postman application.
 3. Use the imported requests to test the app's API endpoints.
 
+##Architecture of the application
 
 ![movie-reco](https://github.com/rafipopz98/movie-reco/assets/107236681/a692fd9a-949d-4276-94e1-6880352a9fef)
+
+![rec](https://github.com/rafipopz98/movie-reco/assets/107236681/c8a93c2e-70d9-4bd5-b337-ceb93190a784)
