@@ -11,6 +11,14 @@ import { watchedMovieRouter } from "./src/routes/watched";
 
 const app = express();
 
+declare global {
+  namespace Express {
+    interface Request {
+      user?: any;
+    }
+  }
+}
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 

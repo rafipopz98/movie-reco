@@ -7,14 +7,6 @@ import {
 } from "../controllers/user";
 import { isAuthUser } from "../middleware/isAuthUser";
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: any;
-    }
-  }
-}
-
 export const userRouter = express.Router();
 
 userRouter.post("/register", userRegister);
