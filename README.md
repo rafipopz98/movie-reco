@@ -4,11 +4,11 @@
 This is a Movie Recommendation Application, where users can filter movies according to their favorite genres. By logging in, users gain access to features such as saving watched lists, liking movies, and adding movies to their bucket lists.
 
 ## Features
-1. **User Registration**: Users can create an account by providing their email and password.
-2. **Movie Liking**: Logged-in users can like movies and save them to their profile.
-3. **Bucket List Movies**: Logged-in users can add movies to their bucket list and keep track of it.
-4. **Watched List Movies**: Logged-in users can mark movies as watched and maintain a list of watched movies on their profile.
-5. **Genre-Based Recommendations**: Users can discover movies based on their preferred genres.
+1. **Genre-Based Recommendations**: Users can discover movies based on their preferred genres, no need to login!
+2. **User Registration**: Users can create an account by providing their email and password to access other features.
+3. **Movie Liking**: Logged-in users can like movies and save them to their profile.
+4. **Bucket List Movies**: Logged-in users can add movies to their bucket list and keep track of it.
+5. **Watched List Movies**: Logged-in users can mark movies as watched and maintain a list of watched movies on their profile.
 6. **Authentication**: User authentication is handled using JSON Web Tokens (JWT).
 
 
