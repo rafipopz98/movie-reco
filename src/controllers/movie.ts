@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Movie from "../database/models/movies";
+import client from "../config/redisClient";
 
 export const addMovie = async (req: Request, res: Response) => {
   const { name, genres } = req.body;
@@ -67,15 +68,29 @@ export const getMovies = async (req: Request, res: Response) => {
   if (genresArray.length === 0 || genresArray.length > 3) {
     return res.status(400).json({
       message:
-        "Genres input is invalid,Atleast 1 genre should be added and At max 3",
+        "Genres input is invalid, At least 1 genre should be added and at most 3",
     });
   }
+  //creating a key string to store in cache
+  const cacheKey = `movies_${JSON.stringify(
+    genresArray
+  )}_${skipNumber}_${takeNumber}`;
+
   try {
+    //will be showed if fetched from db, if it fecthes from cache then it wont be printed
+    console.log("fetching from DB");
     const query = { genres: { $all: genresArray } };
     const movies = await Movie.find(query).skip(skipNumber).limit(takeNumber);
+    // Seting data in cache
+    console.log("Setting cache for key:", cacheKey);
+    client.setEx(cacheKey, 3600, JSON.stringify(movies)); // Cache for 1 hour
     return res.status(200).json({ movies });
   } catch (error) {
     console.error("Error fetching movies:", error);
     res.status(500).json({ message: "Error fetching movies", error });
   }
+};
+
+export const setResponse = (genresArray: any, movies: any) => {
+  return JSON.parse(genresArray, movies);
 };
